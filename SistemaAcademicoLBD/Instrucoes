@@ -1,0 +1,7 @@
+Instruções para instalar o sistema:
+1- Baixar o Apache Tomcat 8 
+2- Clonar o repositório em alguma IDE de preferência (No caso foi utilizado o Eclipse)
+3- Adicionar o servidor apache no projeto
+4- Iniciar o servidor
+Pronto! Agora é só acessar o sistema pela URL abaixo:
+http://localhost:<Porta definida pelo usuário do apache>/SistemaAcademicoLBD/index.xhtml
