@@ -1,0 +1,33 @@
+@CHARSET "ISO-8859-1";
+
+
+
+.campoAluno{
+	width:250px;
+}
+
+.campoRA{
+	width:65px;
+}
+
+.celula{
+	padding: 4px 5px 4px 2px !important;
+	font-size:0.8em;
+}
+
+.ui-icon {
+	-webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
+
+td.celulaVermelha{ 
+	background-color: #E8674B
+}
+
+td.celulaAmarela{ 
+	background-color: #FFFA3E
+}
+
+td.celulaVerde{ 
+	background-color: #5EFF35
+}

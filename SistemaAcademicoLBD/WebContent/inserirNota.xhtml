@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Inserir Nota</title>
+	<h:outputStylesheet library="css" name="style.css"  />
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+	
+	<!-- p:growl id="messages"/-->
+	<h:form>
+    <p:panel id="painel" header="Inserir nota:" >
+        
+        <p:messages id="mensagensInserirNota" showDetail="true" autoUpdate="true" closable="true" />
+        
+        <h:panelGrid columns="2" cellpadding="6">
+        		
+        		
+        		
+	        	<h:outputLabel for="turno" value="Turno:" />
+	            <p:selectOneMenu id="turno" style="width:100px" value="#{notaMB.disciplina.turno}">
+	            	<f:selectItems value="#{notaMB.turnos}" />
+	            	<p:ajax event="change" update="disciplina avaliacao nomeAluno" listener="#{notaMB.turnoSelecionado()}" />
+	      	    </p:selectOneMenu>
+	        	
+	        	<h:outputLabel for="disciplina" value="Disciplina:" />
+	            <p:selectOneMenu id="disciplina" style="width:400px" value="#{notaMB.disciplina.nome}">
+	            	<f:selectItems value="#{notaMB.disciplinas}" />
+	            	<p:ajax event="change" update="avaliacao nomeAluno" listener="#{notaMB.disciplinaSelecionada()}" />
+	      	    </p:selectOneMenu>
+	        	
+	        	<h:outputLabel for="avaliacao" value="Avaliação:" />
+	            <p:selectOneMenu id="avaliacao" style="width:220px" value="#{notaMB.avaliacao.tipo}">
+	            	<f:selectItems value="#{notaMB.avaliacoes}" />
+	      	    </p:selectOneMenu>
+	        	
+	            <h:outputLabel for="nomeAluno" value="Nome aluno:" />
+	            <p:selectOneMenu id="nomeAluno" style="width:220px" value="#{notaMB.aluno.nome}">
+	            	<f:selectItems value="#{notaMB.alunos}" />
+	      	    </p:selectOneMenu>
+	      	    
+	      	    <p:outputLabel for="nota" value="Nota:" />
+	        	<p:inputMask id="nota" mask="99.9" style="width:50px" value="#{notaMB.nota.nota}">
+	        		<f:validateDoubleRange minimum="0.0" maximum="10.0" />
+	        	</p:inputMask>
+	      	    
+	      	    <p:commandButton value="Salvar" update="painel" action="#{notaMB.salvar()}" />
+			
+        </h:panelGrid>
+    </p:panel>
+    </h:form>
+</h:body>
+</html>

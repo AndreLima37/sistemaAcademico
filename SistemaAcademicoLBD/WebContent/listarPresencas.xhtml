@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	
+	<!-- link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/style.css" /-->
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Listar Presenças</title>
+	<h:outputStylesheet library="css" name="style.css"  />
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<!-- p:growl id="messages"/-->
+	<h:form>
+    <p:panel header="Listar presenças:" >
+        
+        <p:messages id="mensagensListarPresencas" showDetail="true" autoUpdate="true" closable="true" />
+        
+        <h:panelGrid columns="2" cellpadding="7">
+        	
+        	<h:outputLabel for="turno" value="Turno:" />
+            <p:selectOneMenu id="turno" style="width:100px" value="#{listarPresencasMB.disciplina.turno}">
+            	<f:selectItems value="#{listarPresencasMB.turnos}" />
+	            <p:ajax event="change" update="disciplina listaResultados" listener="#{listarPresencasMB.turnoSelecionado()}" />
+      	    </p:selectOneMenu>
+        	
+        	<h:outputLabel for="disciplina" value="Disciplina:" />
+            <p:selectOneMenu id="disciplina" style="width:400px" value="#{listarPresencasMB.disciplina.nome}">
+            	<f:selectItems value="#{listarPresencasMB.disciplinas}" />
+	            <p:ajax event="change" update="listaResultados" listener="#{listarPresencasMB.disciplinaSelecionada()}" />
+      	    </p:selectOneMenu>
+
+        </h:panelGrid>
+        
+         <p:dataTable id="listaResultados" var="resultados" value="#{listarPresencasMB.listasDePresencas}" >
+			
+			    <p:column class="celula campoRA" headerText="RA" >
+			        <h:outputText value="#{resultados.get(0)}" />
+			    </p:column>
+			 
+			    <p:column class="celula campoAluno" headerText="Aluno">
+			        <h:outputText value="#{resultados.get(1)}" />
+			    </p:column>
+			 
+			    <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(0)}" >
+			    	<h:outputText value="#{resultados.get(2)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(1)}">
+			     	<h:outputText value="#{resultados.get(3)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(2)}" >
+			     	<h:outputText value="#{resultados.get(4)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(3)}">
+			     	<h:outputText value="#{resultados.get(5)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(4)}" >
+			    	<h:outputText value="#{resultados.get(6)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(5)}" >
+			     	<h:outputText value="#{resultados.get(7)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(6)}" >
+			     	<h:outputText value="#{resultados.get(8)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(7)}" >
+			     	<h:outputText value="#{resultados.get(9)}" />
+			    </p:column>
+			    
+			    <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(8)}" >
+			    	<h:outputText value="#{resultados.get(10)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(9)}" >
+			     	<h:outputText value="#{resultados.get(11)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(10)}" >
+			     	<h:outputText value="#{resultados.get(12)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(11)}" >
+			     	<h:outputText value="#{resultados.get(13)}" />
+			    </p:column>
+			  	
+			  	<p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(12)}" >
+			  		<h:outputText value="#{resultados.get(14)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(13)}" >
+			     	<h:outputText value="#{resultados.get(15)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(14)}" >
+			     	<h:outputText value="#{resultados.get(16)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(15)}" >
+			     	<h:outputText value="#{resultados.get(17)}" />
+			    </p:column>
+			    
+			    <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(16)}" >
+			    	<h:outputText value="#{resultados.get(18)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(17)}">
+			     	<h:outputText value="#{resultados.get(19)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(18)}" >
+			     	<h:outputText value="#{resultados.get(20)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="#{listarPresencasMB.listasDeDatas.get(19)}" >
+			     	<h:outputText value="#{resultados.get(21)}" />
+			    </p:column>
+			    
+			     <p:column class="celula" headerText="Faltas">
+		     		<h:outputText value="#{resultados.get(22)}" />
+			    </p:column>
+			</p:dataTable>
+			<br/>
+    </p:panel>
+    </h:form>
+</h:body>
+</html>

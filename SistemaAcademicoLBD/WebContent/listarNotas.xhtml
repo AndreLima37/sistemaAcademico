@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Listar notas</title>
+	<h:outputStylesheet library="css" name="style.css"  />
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<!-- p:growl id="messages"/-->
+	
+	<h:form>
+    <p:panel header="Listar notas:" >
+        
+        <p:messages id="mensagensListarNotas" showDetail="true" autoUpdate="true" closable="true" />
+        
+        <h:panelGrid columns="2" cellpadding="7">
+        	
+        	<h:outputLabel for="turno" value="Turno:" />
+            <p:selectOneMenu id="turno" style="width:100px" value="#{listarNotasMB.disciplina.turno}">
+            	<f:selectItems value="#{listarNotasMB.turnos}"/>
+	            <p:ajax event="change" update="disciplina listaAlunos" listener="#{listarNotasMB.turnoSelecionado()}" />
+      	    </p:selectOneMenu>
+        	
+        	<h:outputLabel for="disciplina" value="Disciplina:" />
+            <p:selectOneMenu id="disciplina" style="width:400px" value="#{listarNotasMB.disciplina.nome}">
+            	<f:selectItems value="#{listarNotasMB.disciplinas}" />
+	            <p:ajax event="change" update="listaAlunos" listener="#{listarNotasMB.disciplinaSelecionada()}" />
+      	    </p:selectOneMenu>
+
+        </h:panelGrid>
+        
+        <p:dataTable id="listaAlunos" var="notas" value="#{listarNotasMB.listasDeAlunos}" >
+			
+			    <p:column class="celula campoRA" headerText="RA" >
+			        <h:outputText value="#{notas.get(0)}" />
+			    </p:column>
+			 
+			    <p:column class="celula campoAluno" headerText="Aluno">
+			        <h:outputText value="#{notas.get(1)}" />
+			    </p:column>
+			 	
+		 		<p:column rendered="#{listarNotasMB.p1}" class="celula" headerText="P1">
+			        <h:outputText value="#{notas.get(2)}" />
+			    </p:column>
+			    
+			    <p:column rendered="#{listarNotasMB.p2}" class="celula" headerText="P2">
+			        <h:outputText value="#{notas.get(3)}" />
+			    </p:column>
+			    
+			    <p:column rendered="#{listarNotasMB.p3}" class="celula" headerText="P3">
+			        <h:outputText value="#{notas.get(4)}" />
+			    </p:column>
+			    
+			    <p:column rendered="#{listarNotasMB.trabalho}" class="celula" headerText="Trabalho">
+			        <h:outputText value="#{notas.get(5)}" />
+			    </p:column>
+			    
+			    <p:column rendered="#{listarNotasMB.preExame}" class="celula" headerText="Pre-Exame">
+			        <h:outputText value="#{notas.get(6)}" />
+			    </p:column>
+			    
+			    <p:column rendered="#{listarNotasMB.exame}" class="celula" headerText="Exame">
+			        <h:outputText value="#{notas.get(7)}" />
+			    </p:column>
+			    
+			    <p:column class="celula" headerText="Media">
+			        <h:outputText value="#{notas.get(8)}" />
+			    </p:column>
+			    
+			    <p:column headerText="Situacao" class="celula #{notas.get(9) eq 'Reprovado' ? 'celulaVermelha' : 
+			        							(notas.get(9) eq 'Exame' ? 'celulaAmarela' : 'celulaVerde')}">	
+			    	<h:outputText value="#{notas.get(9)}" />
+			    </p:column>
+			   
+			</p:dataTable>
+			<br/>
+    </p:panel>
+    </h:form>
+</h:body>
+</html>

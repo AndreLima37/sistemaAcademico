@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Inserir presença</title>
+	<h:outputStylesheet library="css" name="style.css"  />
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<!-- p:growl id="messages"/-->
+	<h:form>
+    <p:panel header="Inserir presença:" >
+        
+        <p:messages id="mensagensInserirPresenca" showDetail="true" autoUpdate="true" closable="true" />
+        
+        <h:panelGrid columns="2" cellpadding="7">
+        
+        	<p:outputLabel for="data" value="Data:"/>
+        	<p:calendar id="data" pattern="dd/MM/yyyy" mask="true" style="width:100px" value="#{presencaMB.presenca.data}" 
+        		showOn="button" >
+        		<p:ajax event="dateSelect" update="turno disciplina tabelaInserirPresenca" listener="#{presencaMB.atualizarData()}" />
+        	</p:calendar>
+        	
+        	<h:outputLabel for="turno" value="Turno:" />
+            <p:selectOneMenu id="turno" style="width:100px" value="#{presencaMB.disciplina.turno}">
+            	<f:selectItems value="#{presencaMB.turnos}" />
+            	<p:ajax event="change" update="disciplina tabelaInserirPresenca" listener="#{presencaMB.turnoSelecionado()}" />
+      	    </p:selectOneMenu>
+        	
+        	<h:outputLabel for="disciplina" value="Disciplina:" />
+            <p:selectOneMenu id="disciplina" style="width:400px" value="#{presencaMB.disciplina.nome}">
+            	<f:selectItems value="#{presencaMB.disciplinas}" />
+            	<p:ajax event="change" update="tabelaInserirPresenca" listener="#{presencaMB.disciplinaSelecionada()}" />
+      	    </p:selectOneMenu>
+
+        </h:panelGrid>
+        
+         <p:dataTable id="tabelaInserirPresenca" var="aluno" value="#{presencaMB.alunos}">
+			
+			    <p:column headerText="RA" style="width:100px">
+			        <h:outputText value="#{aluno.ra}" />
+			    </p:column>
+			 
+			    <p:column headerText="Aluno" style="width:500px">
+			        <h:outputText value="#{aluno.nome}" />
+			    </p:column>
+			 	
+			 	<c:forEach items="#{presencaMB.presencaColuna}" var="coluna">
+			 		<p:column headerText="#{coluna.headerText}">
+				        <p:selectBooleanCheckbox value="#{presencaMB.checkBoxEstado}" >
+				        	<p:ajax listener="#{presencaMB.alterarPresenca}" />
+				        	<f:param name="nomeAluno" value="#{aluno.nome}" />
+				        	<f:param name="nomeRA" value="#{aluno.ra}" />
+				        </p:selectBooleanCheckbox>
+				    </p:column>
+			 	</c:forEach>
+			  
+			</p:dataTable>
+			<br/>
+			<p:commandButton value="Salvar" action="#{presencaMB.salvar()}" ></p:commandButton>
+    </p:panel>
+    </h:form>
+</h:body>
+</html>
